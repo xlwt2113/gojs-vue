@@ -65,6 +65,7 @@
           :show-count="true"
           placeholder="请选择归属部门"
           style="width: 180px"
+          key="searchTree"
         />
       </el-form-item>
       <el-form-item>
@@ -354,7 +355,7 @@ export default {
     })
   },
   methods: {
-
+    // 打开查看页面
     handleView(row) {
       this.$refs.viewPage.show(row)
     },

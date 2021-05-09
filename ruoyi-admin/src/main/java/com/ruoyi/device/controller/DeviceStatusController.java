@@ -70,7 +70,6 @@ public class DeviceStatusController extends BaseController
     /**
      * 获取设备状态表详细信息
      */
-    @PreAuthorize("@ss.hasPermi('device:status:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {

@@ -1,6 +1,9 @@
 package com.ruoyi.device.controller;
 
 import java.util.List;
+
+import com.ruoyi.device.domain.DeviceStatus;
+import com.ruoyi.device.service.IDeviceStatusService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * deviceInfoController
- * 
+ *
  * @author 王涛
  * @date 2021-05-07
  */
