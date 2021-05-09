@@ -40,7 +40,7 @@
       </el-form-item>
     </el-form>
 
-<!--    <el-row :gutter="10" class="mb8">-->
+    <el-row :gutter="10" class="mb8">
 <!--      <el-col :span="1.5">-->
 <!--        <el-button-->
 <!--          type="primary"-->
@@ -48,7 +48,7 @@
 <!--          icon="el-icon-plus"-->
 <!--          size="mini"-->
 <!--          @click="handleAdd"-->
-<!--          v-hasPermi="['system:status:add']"-->
+<!--          v-hasPermi="['device:status:add']"-->
 <!--        >新增</el-button>-->
 <!--      </el-col>-->
 <!--      <el-col :span="1.5">-->
@@ -59,7 +59,7 @@
 <!--          size="mini"-->
 <!--          :disabled="single"-->
 <!--          @click="handleUpdate"-->
-<!--          v-hasPermi="['system:status:edit']"-->
+<!--          v-hasPermi="['device:status:edit']"-->
 <!--        >修改</el-button>-->
 <!--      </el-col>-->
 <!--      <el-col :span="1.5">-->
@@ -70,7 +70,7 @@
 <!--          size="mini"-->
 <!--          :disabled="multiple"-->
 <!--          @click="handleDelete"-->
-<!--          v-hasPermi="['system:status:remove']"-->
+<!--          v-hasPermi="['device:status:remove']"-->
 <!--        >删除</el-button>-->
 <!--      </el-col>-->
 <!--      <el-col :span="1.5">-->
@@ -80,17 +80,26 @@
 <!--          icon="el-icon-download"-->
 <!--          size="mini"-->
 <!--          @click="handleExport"-->
-<!--          v-hasPermi="['system:status:export']"-->
+<!--          v-hasPermi="['device:status:export']"-->
 <!--        >导出</el-button>-->
 <!--      </el-col>-->
-<!--      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>-->
-<!--    </el-row>-->
+      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+    </el-row>
 
     <el-table v-loading="loading" :data="statusList" @selection-change="handleSelectionChange">
 <!--      <el-table-column type="selection" width="55" align="center" />-->
 <!--      <el-table-column label="设备实时状态" align="center" prop="id" />-->
       <el-table-column label="设备名称" align="center" prop="deviceInfo.deviceName"/>
-      <el-table-column label="设备实时状态" align="center" prop="deviceStatus" :formatter="deviceStatusFormat" />
+      <el-table-column label="设备实时状态" align="center" prop="deviceStatus" :formatter="deviceStatusFormat">
+        <template slot-scope="scope">
+          <el-tag type="success" effect="dark" v-if="scope.row.deviceStatus === 1">{{deviceStatusFormat(scope.row)}}</el-tag>
+          <el-tag type="warning" effect="dark" v-if="scope.row.deviceStatus === 2">{{deviceStatusFormat(scope.row)}}</el-tag>
+          <el-tag type="danger" effect="dark" v-if="scope.row.deviceStatus === 3">{{deviceStatusFormat(scope.row)}}</el-tag>
+          <el-tag type="info" effect="dark" v-if="scope.row.deviceStatus === 4">{{deviceStatusFormat(scope.row)}}</el-tag>
+          <el-tag type="info" effect="dark" v-if="scope.row.deviceStatus === 5">{{deviceStatusFormat(scope.row)}}</el-tag>
+        </template>
+      </el-table-column>
+
       <el-table-column label="ping平均时延" align="center" prop="pingAvg" />
       <el-table-column label="最小时延" align="center" prop="pingMin" />
       <el-table-column label="最大时延" align="center" prop="pingMax" />
@@ -108,14 +117,14 @@
 <!--            type="text"-->
 <!--            icon="el-icon-edit"-->
 <!--            @click="handleUpdate(scope.row)"-->
-<!--            v-hasPermi="['system:status:edit']"-->
+<!--            v-hasPermi="['device:status:edit']"-->
 <!--          >修改</el-button>-->
 <!--          <el-button-->
 <!--            size="mini"-->
 <!--            type="text"-->
 <!--            icon="el-icon-delete"-->
 <!--            @click="handleDelete(scope.row)"-->
-<!--            v-hasPermi="['system:status:remove']"-->
+<!--            v-hasPermi="['device:status:remove']"-->
 <!--          >删除</el-button>-->
 <!--        </template>-->
 <!--      </el-table-column>-->
@@ -173,7 +182,7 @@
 </template>
 
 <script>
-import { listStatus, getStatus, delStatus, addStatus, updateStatus, exportStatus } from "@/api/system/status";
+import { listStatus, getStatus, delStatus, addStatus, updateStatus, exportStatus } from "@/api/device/status";
 
 export default {
   name: "Status",

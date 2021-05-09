@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询设备状态表列表
 export function listStatus(query) {
   return request({
-    url: '/system/status/list',
+    url: '/device/status/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listStatus(query) {
 // 查询设备状态表详细
 export function getStatus(id) {
   return request({
-    url: '/system/status/' + id,
+    url: '/device/status/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getStatus(id) {
 // 新增设备状态表
 export function addStatus(data) {
   return request({
-    url: '/system/status',
+    url: '/device/status',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addStatus(data) {
 // 修改设备状态表
 export function updateStatus(data) {
   return request({
-    url: '/system/status',
+    url: '/device/status',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateStatus(data) {
 // 删除设备状态表
 export function delStatus(id) {
   return request({
-    url: '/system/status/' + id,
+    url: '/device/status/' + id,
     method: 'delete'
   })
 }
@@ -46,7 +46,7 @@ export function delStatus(id) {
 // 导出设备状态表
 export function exportStatus(query) {
   return request({
-    url: '/system/status/export',
+    url: '/device/status/export',
     method: 'get',
     params: query
   })

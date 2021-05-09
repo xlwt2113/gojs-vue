@@ -117,6 +117,7 @@
 
     <el-table v-loading="loading" :data="infoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="编号" align="center" prop="id"  width="60"/>
       <el-table-column label="归属部门" align="center" prop="dept.deptName"/>
       <el-table-column label="设备名称" align="center" prop="deviceName">
         <template slot-scope="scope">

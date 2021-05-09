@@ -34,7 +34,7 @@
       </el-form-item>
     </el-form>
 
-<!--    <el-row :gutter="10" class="mb8">-->
+    <el-row :gutter="10" class="mb8">
 <!--      <el-col :span="1.5">-->
 <!--        <el-button-->
 <!--          type="primary"-->
@@ -81,8 +81,8 @@
 <!--        >导出-->
 <!--        </el-button>-->
 <!--      </el-col>-->
-<!--      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>-->
-<!--    </el-row>-->
+      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+    </el-row>
 
     <el-table v-loading="loading" :data="eventList" @selection-change="handleSelectionChange">
 <!--      <el-table-column type="selection" width="55" align="center"/>-->

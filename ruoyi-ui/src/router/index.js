@@ -28,6 +28,19 @@ import ParentView from '@/components/ParentView';
 // 公共路由
 export const constantRoutes = [
   {
+    path: '/device',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'topology/design/:id(\\d+)',
+        component: (resolve) => require(['@/views/device/topology/design'], resolve),
+        name: 'TopologyDesign',
+        meta: { title: '拓扑维护', icon: '' }
+      }
+    ]
+  },
+  {
     path: '/redirect',
     component: Layout,
     hidden: true,
