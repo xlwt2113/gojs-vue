@@ -287,7 +287,7 @@ export default {
     },
     /** 打开导入表弹窗 */
     openImportTable() {
-      this.$refs.import.show();
+      this.$refs.import.view();
     },
     /** 重置按钮操作 */
     resetQuery() {

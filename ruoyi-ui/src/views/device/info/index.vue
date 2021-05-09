@@ -57,7 +57,8 @@
         />
       </el-form-item>
       <el-form-item label="部门" prop="deptId">
-        <treeselect v-model="queryParams.deptId" :options="deptOptions" :show-count="true" placeholder="请选择归属部门" style="width: 180px" />
+        <treeselect v-model="queryParams.deptId" :options="deptOptions" :show-count="true" placeholder="请选择归属部门"
+                    style="width: 180px"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -117,11 +118,11 @@
 
     <el-table v-loading="loading" :data="infoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="编号" align="center" prop="id"  width="60"/>
+      <el-table-column label="编号" align="center" prop="id" width="60"/>
       <el-table-column label="归属部门" align="center" prop="dept.deptName"/>
       <el-table-column label="设备名称" align="center" prop="deviceName">
         <template slot-scope="scope">
-          <el-button type="text">{{scope.row.deviceName}}</el-button>
+          <el-button type="text" @click="handleView(scope.row)">{{scope.row.deviceName}}</el-button>
         </template>
       </el-table-column>
       <el-table-column label="设备类型" align="center" prop="deviceType" :formatter="deviceTypeFormat"/>
@@ -129,12 +130,12 @@
       <el-table-column label="制造商" align="center" prop="manufacturer"/>
       <el-table-column label="设备IP1" align="center" prop="deviceIp1"/>
       <el-table-column label="设备IP2" align="center" prop="deviceIp2"/>
-<!--      <el-table-column label="设备IP3" align="center" prop="deviceIp3"/>-->
-<!--      <el-table-column label="设备IP4" align="center" prop="deviceIp4"/>-->
-<!--      <el-table-column label="设备IP5" align="center" prop="deviceIp5"/>-->
-<!--      <el-table-column label="设备IP6" align="center" prop="deviceIp6"/>-->
-<!--      <el-table-column label="设备IP7" align="center" prop="deviceIp7"/>-->
-<!--      <el-table-column label="设备IP8" align="center" prop="deviceIp8"/>-->
+      <!--      <el-table-column label="设备IP3" align="center" prop="deviceIp3"/>-->
+      <!--      <el-table-column label="设备IP4" align="center" prop="deviceIp4"/>-->
+      <!--      <el-table-column label="设备IP5" align="center" prop="deviceIp5"/>-->
+      <!--      <el-table-column label="设备IP6" align="center" prop="deviceIp6"/>-->
+      <!--      <el-table-column label="设备IP7" align="center" prop="deviceIp7"/>-->
+      <!--      <el-table-column label="设备IP8" align="center" prop="deviceIp8"/>-->
       <el-table-column label="安装日期" align="center" prop="installDate" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.installDate, '{y}-{m}-{d}') }}</span>
@@ -180,7 +181,7 @@
               <el-input v-model="form.deviceName" placeholder="请输入设备名称"/>
             </el-form-item>
             <el-form-item label="部门" prop="deptId">
-              <treeselect v-model="form.deptId" :options="deptOptions" :show-count="true" placeholder="请选择归属部门" />
+              <treeselect v-model="form.deptId" :options="deptOptions" :show-count="true" placeholder="请选择归属部门"/>
             </el-form-item>
             <el-form-item label="设备类型" prop="deviceType">
               <el-select v-model="form.deviceType" placeholder="请选择设备类型">
@@ -253,18 +254,21 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+    <device-info-view ref="viewPage"/>
   </div>
 </template>
 
 <script>
   import {listInfo, getInfo, delInfo, addInfo, updateInfo, exportInfo} from "@/api/device/info";
-  import { treeselect } from "@/api/system/dept";
+  import {treeselect} from "@/api/system/dept";
   import Treeselect from "@riophae/vue-treeselect";
   import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+  import DeviceInfoView from "@/views/device/info/view";
 
   export default {
     name: "Info",
-    components: { Treeselect },
+    components: {Treeselect, DeviceInfoView},
     data() {
       return {
         // 遮罩层
@@ -342,6 +346,11 @@
       });
     },
     methods: {
+
+      handleView(row) {
+        this.$refs.viewPage.show(row);
+      },
+
       /** 查询部门下拉树结构 */
       getTreeselect() {
         treeselect().then(response => {
