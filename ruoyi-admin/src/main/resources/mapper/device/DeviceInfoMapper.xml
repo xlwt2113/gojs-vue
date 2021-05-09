@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.device.mapper.DeviceInfoMapper">
+
+    <resultMap type="DeviceInfo" id="DeviceInfoResult">
+        <result property="id"    column="id"    />
+        <result property="deviceName"    column="device_name"    />
+        <result property="deviceType"    column="device_type"    />
+        <result property="deviceModel"    column="device_model"    />
+        <result property="manufacturer"    column="manufacturer"    />
+        <result property="deviceIp1"    column="device_ip1"    />
+        <result property="deviceIp2"    column="device_ip2"    />
+        <result property="deviceIp3"    column="device_ip3"    />
+        <result property="deviceIp4"    column="device_ip4"    />
+        <result property="deviceIp5"    column="device_ip5"    />
+        <result property="deviceIp6"    column="device_ip6"    />
+        <result property="deviceIp7"    column="device_ip7"    />
+        <result property="deviceIp8"    column="device_ip8"    />
+        <result property="installDate"    column="install_date"    />
+        <result property="location"    column="location"    />
+        <result property="note"    column="note"    />
+        <result property="miningArea"    column="mining_area"    />
+        <result property="company"    column="company"    />
+        <result property="deptId"    column="dept_id"    />
+        <association property="dept"     column="dept_id" javaType="SysDept" resultMap="deptResult" />
+    </resultMap>
+
+    <resultMap id="deptResult" type="SysDept">
+        <id     property="deptId"   column="dept_id"     />
+        <result property="parentId" column="parent_id"   />
+        <result property="deptName" column="dept_name"   />
+        <result property="ancestors"  column="ancestors"   />
+        <result property="orderNum" column="order_num"   />
+        <result property="leader"   column="leader"      />
+        <result property="status"   column="dept_status" />
+        <result property="status"   column="dept_status" />
+    </resultMap>
+
+    <sql id="selectDeviceInfoVo">
+        select * from device_info u left join sys_dept d on u.dept_id = d.dept_id
+    </sql>
+
+    <select id="selectDeviceInfoList" parameterType="DeviceInfo" resultMap="DeviceInfoResult">
+        <include refid="selectDeviceInfoVo"/>
+        <where>
+            <if test="deviceName != null  and deviceName != ''"> and device_name like concat('%', #{deviceName}, '%')</if>
+            <if test="deviceType != null  and deviceType != ''"> and device_type = #{deviceType}</if>
+            <if test="deviceModel != null  and deviceModel != ''"> and device_model = #{deviceModel}</if>
+            <if test="manufacturer != null  and manufacturer != ''"> and manufacturer = #{manufacturer}</if>
+            <if test="deviceIp1 != null  and deviceIp1 != ''"> and device_ip1 = #{deviceIp1}</if>
+            <if test="deviceIp2 != null  and deviceIp2 != ''"> and device_ip2 = #{deviceIp2}</if>
+            <if test="deviceIp3 != null  and deviceIp3 != ''"> and device_ip3 = #{deviceIp3}</if>
+            <if test="deviceIp4 != null  and deviceIp4 != ''"> and device_ip4 = #{deviceIp4}</if>
+            <if test="deviceIp5 != null  and deviceIp5 != ''"> and device_ip5 = #{deviceIp5}</if>
+            <if test="deviceIp6 != null  and deviceIp6 != ''"> and device_ip6 = #{deviceIp6}</if>
+            <if test="deviceIp7 != null  and deviceIp7 != ''"> and device_ip7 = #{deviceIp7}</if>
+            <if test="deviceIp8 != null  and deviceIp8 != ''"> and device_ip8 = #{deviceIp8}</if>
+            <if test="installDate != null "> and install_date = #{installDate}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="deptId != null "> and u.dept_id = #{deptId}</if>
+        </where>
+    </select>
+
+    <select id="selectDeviceInfoById" parameterType="Integer" resultMap="DeviceInfoResult">
+        <include refid="selectDeviceInfoVo"/>
+        where u.id = #{id}
+    </select>
+
+    <insert id="insertDeviceInfo" parameterType="DeviceInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into device_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceName != null and deviceName != ''">device_name,</if>
+            <if test="deviceType != null and deviceType != ''">device_type,</if>
+            <if test="deviceModel != null and deviceModel != ''">device_model,</if>
+            <if test="manufacturer != null">manufacturer,</if>
+            <if test="deviceIp1 != null and deviceIp1 != ''">device_ip1,</if>
+            <if test="deviceIp2 != null">device_ip2,</if>
+            <if test="deviceIp3 != null">device_ip3,</if>
+            <if test="deviceIp4 != null">device_ip4,</if>
+            <if test="deviceIp5 != null">device_ip5,</if>
+            <if test="deviceIp6 != null">device_ip6,</if>
+            <if test="deviceIp7 != null">device_ip7,</if>
+            <if test="deviceIp8 != null">device_ip8,</if>
+            <if test="installDate != null">install_date,</if>
+            <if test="location != null">location,</if>
+            <if test="note != null">note,</if>
+            <if test="miningArea != null">mining_area,</if>
+            <if test="company != null">company,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deviceName != null and deviceName != ''">#{deviceName},</if>
+            <if test="deviceType != null and deviceType != ''">#{deviceType},</if>
+            <if test="deviceModel != null and deviceModel != ''">#{deviceModel},</if>
+            <if test="manufacturer != null">#{manufacturer},</if>
+            <if test="deviceIp1 != null and deviceIp1 != ''">#{deviceIp1},</if>
+            <if test="deviceIp2 != null">#{deviceIp2},</if>
+            <if test="deviceIp3 != null">#{deviceIp3},</if>
+            <if test="deviceIp4 != null">#{deviceIp4},</if>
+            <if test="deviceIp5 != null">#{deviceIp5},</if>
+            <if test="deviceIp6 != null">#{deviceIp6},</if>
+            <if test="deviceIp7 != null">#{deviceIp7},</if>
+            <if test="deviceIp8 != null">#{deviceIp8},</if>
+            <if test="installDate != null">#{installDate},</if>
+            <if test="location != null">#{location},</if>
+            <if test="note != null">#{note},</if>
+            <if test="miningArea != null">#{miningArea},</if>
+            <if test="company != null">#{company},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDeviceInfo" parameterType="DeviceInfo">
+        update device_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deviceName != null and deviceName != ''">device_name = #{deviceName},</if>
+            <if test="deviceType != null and deviceType != ''">device_type = #{deviceType},</if>
+            <if test="deviceModel != null and deviceModel != ''">device_model = #{deviceModel},</if>
+            <if test="manufacturer != null">manufacturer = #{manufacturer},</if>
+            <if test="deviceIp1 != null and deviceIp1 != ''">device_ip1 = #{deviceIp1},</if>
+            <if test="deviceIp2 != null">device_ip2 = #{deviceIp2},</if>
+            <if test="deviceIp3 != null">device_ip3 = #{deviceIp3},</if>
+            <if test="deviceIp4 != null">device_ip4 = #{deviceIp4},</if>
+            <if test="deviceIp5 != null">device_ip5 = #{deviceIp5},</if>
+            <if test="deviceIp6 != null">device_ip6 = #{deviceIp6},</if>
+            <if test="deviceIp7 != null">device_ip7 = #{deviceIp7},</if>
+            <if test="deviceIp8 != null">device_ip8 = #{deviceIp8},</if>
+            <if test="installDate != null">install_date = #{installDate},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="miningArea != null">mining_area = #{miningArea},</if>
+            <if test="company != null">company = #{company},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDeviceInfoById" parameterType="Integer">
+        delete from device_info where id = #{id}
+    </delete>
+
+    <delete id="deleteDeviceInfoByIds" parameterType="String">
+        delete from device_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
