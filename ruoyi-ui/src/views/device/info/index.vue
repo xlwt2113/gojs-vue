@@ -60,12 +60,12 @@
       </el-form-item>
       <el-form-item label="部门" prop="deptId">
         <treeselect
+          key="searchTree"
           v-model="queryParams.deptId"
           :options="deptOptions"
           :show-count="true"
           placeholder="请选择归属部门"
           style="width: 180px"
-          key="searchTree"
         />
       </el-form-item>
       <el-form-item>
@@ -135,6 +135,7 @@
       </el-table-column>
       <el-table-column label="设备类型" align="center" prop="deviceType" :formatter="deviceTypeFormat" />
       <el-table-column label="设备型号" align="center" prop="deviceModel" :formatter="deviceModelFormat" />
+      <el-table-column label="设备级别" align="center" prop="deviceLevel" :formatter="deviceLevelFormat" />
       <el-table-column label="制造商" align="center" prop="manufacturer" />
       <el-table-column label="设备IP1" align="center" prop="deviceIp1" />
       <el-table-column label="设备IP2" align="center" prop="deviceIp2" />
@@ -205,6 +206,16 @@
               <el-select v-model="form.deviceModel" placeholder="请选择设备型号">
                 <el-option
                   v-for="dict in deviceModelOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item label="设备级别" prop="deviceModel">
+              <el-select v-model="form.deviceLevel" placeholder="请选择设备级别">
+                <el-option
+                  v-for="dict in deviceLevelOptions"
                   :key="dict.dictValue"
                   :label="dict.dictLabel"
                   :value="dict.dictValue"
@@ -302,6 +313,7 @@ export default {
       deviceTypeOptions: [],
       // 设备型号字典
       deviceModelOptions: [],
+      deviceLevelOptions: [],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -353,6 +365,9 @@ export default {
     this.getDicts('device_info_model').then(response => {
       this.deviceModelOptions = response.data
     })
+    this.getDicts('device_info_level').then(response => {
+      this.deviceLevelOptions = response.data
+    })
   },
   methods: {
     // 打开查看页面
@@ -382,6 +397,10 @@ export default {
     // 设备型号字典翻译
     deviceModelFormat(row, column) {
       return this.selectDictLabel(this.deviceModelOptions, row.deviceModel)
+    },
+    // 设备型号字典翻译
+    deviceLevelFormat(row, column) {
+      return this.selectDictLabel(this.deviceLevelOptions, row.deviceLevel)
     },
     // 取消按钮
     cancel() {

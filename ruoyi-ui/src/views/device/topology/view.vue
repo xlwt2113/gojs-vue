@@ -75,7 +75,7 @@ import { updateTopology } from '@/api/device/topology'
 import { listInfo } from '@/api/device/info'
 
 export default {
-  name: 'TopologyDesign',
+  name: 'TopologyView',
   data() {
     return {
       myDiagram: undefined,

@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="deviceName"    column="device_name"    />
         <result property="deviceType"    column="device_type"    />
+        <result property="deviceLevel"    column="device_level"    />
         <result property="deviceModel"    column="device_model"    />
         <result property="manufacturer"    column="manufacturer"    />
         <result property="deviceIp1"    column="device_ip1"    />
@@ -48,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceName != null  and deviceName != ''"> and device_name like concat('%', #{deviceName}, '%')</if>
             <if test="deviceType != null  and deviceType != ''"> and device_type = #{deviceType}</if>
             <if test="deviceModel != null  and deviceModel != ''"> and device_model = #{deviceModel}</if>
+            <if test="deviceLevel != null  and deviceLevel != ''"> and device_level = #{deviceLevel}</if>
             <if test="manufacturer != null  and manufacturer != ''"> and manufacturer = #{manufacturer}</if>
             <if test="deviceIp1 != null  and deviceIp1 != ''"> and device_ip1 = #{deviceIp1}</if>
             <if test="deviceIp2 != null  and deviceIp2 != ''"> and device_ip2 = #{deviceIp2}</if>
@@ -74,6 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="deviceName != null and deviceName != ''">device_name,</if>
             <if test="deviceType != null and deviceType != ''">device_type,</if>
+            <if test="deviceLevel != null and deviceLevel != ''">device_level,</if>
             <if test="deviceModel != null and deviceModel != ''">device_model,</if>
             <if test="manufacturer != null">manufacturer,</if>
             <if test="deviceIp1 != null and deviceIp1 != ''">device_ip1,</if>
@@ -94,6 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="deviceName != null and deviceName != ''">#{deviceName},</if>
             <if test="deviceType != null and deviceType != ''">#{deviceType},</if>
+            <if test="deviceLevel != null and deviceLevel != ''">#{deviceLevel},</if>
             <if test="deviceModel != null and deviceModel != ''">#{deviceModel},</if>
             <if test="manufacturer != null">#{manufacturer},</if>
             <if test="deviceIp1 != null and deviceIp1 != ''">#{deviceIp1},</if>
@@ -118,6 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="deviceName != null and deviceName != ''">device_name = #{deviceName},</if>
             <if test="deviceType != null and deviceType != ''">device_type = #{deviceType},</if>
+            <if test="deviceLevel != null and deviceLevel != ''">device_level = #{deviceLevel},</if>
             <if test="deviceModel != null and deviceModel != ''">device_model = #{deviceModel},</if>
             <if test="manufacturer != null">manufacturer = #{manufacturer},</if>
             <if test="deviceIp1 != null and deviceIp1 != ''">device_ip1 = #{deviceIp1},</if>

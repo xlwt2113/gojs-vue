@@ -2,8 +2,10 @@ package com.ruoyi.device.controller;
 
 import java.util.List;
 
+import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.device.domain.DeviceStatus;
 import com.ruoyi.device.service.IDeviceStatusService;
+import com.ruoyi.system.service.ISysDeptService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,7 @@ public class DeviceInfoController extends BaseController
     @Autowired
     private IDeviceInfoService deviceInfoService;
 
+
     /**
      * 查询deviceInfo列表
      */
@@ -52,7 +55,7 @@ public class DeviceInfoController extends BaseController
      * 导出deviceInfo列表
      */
     @PreAuthorize("@ss.hasPermi('device:info:export')")
-    @Log(title = "deviceInfo", businessType = BusinessType.EXPORT)
+    @Log(title = "设备信息", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(DeviceInfo deviceInfo)
     {
@@ -86,7 +89,7 @@ public class DeviceInfoController extends BaseController
      * 修改deviceInfo
      */
     @PreAuthorize("@ss.hasPermi('device:info:edit')")
-    @Log(title = "deviceInfo", businessType = BusinessType.UPDATE)
+    @Log(title = "设备信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody DeviceInfo deviceInfo)
     {
@@ -97,7 +100,7 @@ public class DeviceInfoController extends BaseController
      * 删除deviceInfo
      */
     @PreAuthorize("@ss.hasPermi('device:info:remove')")
-    @Log(title = "deviceInfo", businessType = BusinessType.DELETE)
+    @Log(title = "设备信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Integer[] ids)
     {

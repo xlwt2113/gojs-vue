@@ -22,7 +22,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 拓扑图维护Controller
- * 
+ *
  * @author 王涛
  * @date 2021-05-09
  */
@@ -63,6 +63,7 @@ public class DeviceTopologyController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('device:topology:query')")
     @GetMapping(value = "/{id}")
+    @Log(title = "拓扑图查看", businessType = BusinessType.OTHER)
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
         return AjaxResult.success(deviceTopologyService.selectDeviceTopologyById(id));

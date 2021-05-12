@@ -31,6 +31,10 @@ public class DeviceInfo extends BaseEntity
     @Excel(name = "设备类型")
     private String deviceType;
 
+    /** 设备级别 */
+    @Excel(name = "设备级别")
+    private String deviceLevel;
+
     /** 设备型号 */
     @Excel(name = "设备型号")
     private String deviceModel;
@@ -262,6 +266,14 @@ public class DeviceInfo extends BaseEntity
     public Long getDeptId()
     {
         return deptId;
+    }
+
+    public String getDeviceLevel() {
+        return deviceLevel;
+    }
+
+    public void setDeviceLevel(String deviceLevel) {
+        this.deviceLevel = deviceLevel;
     }
 
     @Override

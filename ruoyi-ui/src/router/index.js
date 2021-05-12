@@ -36,6 +36,12 @@ export const constantRoutes = [
         component: (resolve) => require(['@/views/device/topology/design'], resolve),
         name: 'TopologyDesign',
         meta: { title: '拓扑维护', icon: '' }
+      },
+      {
+        path: 'topology/view/:id(\\d+)',
+        component: (resolve) => require(['@/views/device/topology/view'], resolve),
+        name: 'TopologyView',
+        meta: { title: '拓扑查看', icon: '' }
       }
     ]
   },
