@@ -34,6 +34,7 @@
                   <div class="title">近期查看拓扑图</div>
                   <div style="padding-top: 10px" />
                   <div><el-link type="primary" @click="viewTopology(1)">集团拓扑图</el-link></div>
+                  <div><el-link type="primary" @click="viewTopology(2)">分站</el-link></div>
                   <div><el-link type="primary">主要链接</el-link></div>
                   <div><el-link type="primary">主要链接</el-link></div>
                 </el-col>

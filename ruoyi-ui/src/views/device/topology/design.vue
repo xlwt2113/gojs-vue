@@ -470,8 +470,16 @@ export default {
         })
         var model = this.myDiagram.model
         var arr = model.nodeDataArray
-        // 循环节点匹配，更新设备状态
+
+        // 判断是否存在重复添加
         for (var i = 0; i < arr.length; i++) {
+          if (arr[i].key === this.selectedDevice.id) {
+            return this.$message.error('不能重复绑定该设备！')
+          }
+        }
+
+        // 循环节点匹配，更新设备状态
+        for (i = 0; i < arr.length; i++) {
           var nodeData = arr[i]
           if (nodeData.key === this.selectedNode.key) {
             nodeData.key = this.selectedDevice.id
@@ -485,6 +493,7 @@ export default {
             break
           }
         }
+        this.myDiagram.model = go.Model.fromJson(this.myDiagram.model.toJson());
 
         this.dialogVisible = false
       } else {

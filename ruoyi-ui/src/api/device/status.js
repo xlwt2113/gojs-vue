@@ -51,3 +51,12 @@ export function exportStatus(query) {
     params: query
   })
 }
+
+// 新增设备状态表
+export function getDeviceStatus(query) {
+  return request({
+    url: '/device/status/deviceStatus',
+    method: 'get',
+    params: query
+  })
+}
