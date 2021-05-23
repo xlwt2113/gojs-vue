@@ -9,6 +9,13 @@ export function listEvent(query) {
   })
 }
 
+export function listEventByDeviceId(deviceId) {
+  return request({
+    url: '/device/event/listByDeviceId/' + deviceId,
+    method: 'get'
+  })
+}
+
 // 查询设备事件表详细
 export function getEvent(id) {
   return request({

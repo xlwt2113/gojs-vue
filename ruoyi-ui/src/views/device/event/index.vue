@@ -91,7 +91,7 @@
       <el-table-column label="告警内容" align="center" prop="warningContent" />
       <el-table-column label="告警时间" align="center" prop="warningTime" width="180">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.warningTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.warningTime, '{y}-{m}-{d} {hh}:{mi}:{ss}') }}</span>
         </template>
       </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -256,6 +256,8 @@ export default {
     /** 重置按钮操作 */
     resetQuery() {
       this.resetForm('queryForm')
+      this.queryParams.updateTimeBegin = undefined
+      this.queryParams.updateTimeEnd = undefined
       this.handleQuery()
     },
     // 多选框选中数据

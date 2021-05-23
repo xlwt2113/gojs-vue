@@ -56,6 +56,14 @@ public class DeviceEventController extends BaseController
         return getDataTable(list);
     }
 
+    @GetMapping(value = "listByDeviceId/{deviceId}")
+    public AjaxResult listByDeviceId(@PathVariable("deviceId") Long deviceId){
+        DeviceEvent param = new DeviceEvent();
+        param.setDeviceId(deviceId);
+        List<DeviceEvent> list = deviceEventService.selectDeviceEventList(param);
+        return AjaxResult.success(list);
+    }
+
     /**
      * 导出设备事件表列表
      */

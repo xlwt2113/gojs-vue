@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="warningLevel != null "> and warning_level = #{warningLevel}</if>
             <if test="warningContent != null  and warningContent != ''"> and warning_content = #{warningContent}</if>
             <if test="updateTimeBegin != null and updateTimeBegin != ''"> and warning_time >= #{updateTimeBegin}</if>
-            <if test="updateTimeEnd != null and updateTimeEnd !=''"> and warning_time <![CDATA[<=]]>  #{updateTimeEnd}</if>
+            <if test="updateTimeEnd != null and updateTimeEnd !=''"> and warning_time <![CDATA[<=]]> concat( #{updateTimeEnd}, ' 23:59:59')</if>
         </where>
     </select>
 

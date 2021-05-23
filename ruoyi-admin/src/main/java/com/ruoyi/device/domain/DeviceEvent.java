@@ -19,6 +19,8 @@ public class DeviceEvent extends BaseEntity
 
     private DeviceInfo deviceInfo;
 
+    private String updateTimeBegin,updateTimeEnd;
+
     /** $column.columnComment */
     private Long id;
 
@@ -36,7 +38,7 @@ public class DeviceEvent extends BaseEntity
 
     /** 告警时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Excel(name = "告警时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @Excel(name = "告警时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date warningTime;
 
     public void setId(Long id)
@@ -91,6 +93,22 @@ public class DeviceEvent extends BaseEntity
 
     public void setDeviceInfo(DeviceInfo deviceInfo) {
         this.deviceInfo = deviceInfo;
+    }
+
+    public String getUpdateTimeBegin() {
+        return updateTimeBegin;
+    }
+
+    public void setUpdateTimeBegin(String updateTimeBegin) {
+        this.updateTimeBegin = updateTimeBegin;
+    }
+
+    public String getUpdateTimeEnd() {
+        return updateTimeEnd;
+    }
+
+    public void setUpdateTimeEnd(String updateTimeEnd) {
+        this.updateTimeEnd = updateTimeEnd;
     }
 
     @Override

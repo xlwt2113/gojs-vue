@@ -1,11 +1,13 @@
 <template>
   <el-dialog
-    title="查看"
+    title="查看设备信息"
     :visible.sync="dialogVisible"
-    width="400"
+    width="80%"
   >
     <span>
-      <el-card class="box-card">
+      <el-row :gutter="24">
+        <el-col :span="12">
+          <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>设备信息</span>
         </div>
@@ -96,8 +98,9 @@
           </el-row>
         </div>
       </el-card>
-      <div style="padding-top: 30px" />
-      <el-card class="box-card">
+        </el-col>
+        <el-col :span="12">
+          <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>状态信息</span>
         </div>
@@ -138,17 +141,31 @@
                   {{ deviceStatus.pingMin }}
                 </el-form-item>
               </el-col>
-
             </el-form>
           </el-row>
         </div>
       </el-card>
+        </el-col>
+      </el-row>
+      <el-table :data="eventList" height="250" style="padding-top: 20px">
+        <el-table-column type="selection" width="55" align="center" />
+        <el-table-column label="ID" align="center" prop="id" width="40" />
+        <el-table-column label="设备名称" align="center" prop="deviceInfo.deviceName" />
+        <el-table-column label="告警类型" align="center" prop="warningLevel" :formatter="warningLevelFormat" />
+        <el-table-column label="告警内容" align="center" prop="warningContent" />
+        <el-table-column label="告警时间" align="center" prop="warningTime" width="180">
+          <template slot-scope="scope">
+            <span>{{ parseTime(scope.row.warningTime, '{y}-{m}-{d} {hh}:{mi}:{ss}') }}</span>
+          </template>
+        </el-table-column>
+      </el-table>
     </span>
   </el-dialog>
 </template>
 <script>
 import { getInfo } from '@/api/device/info'
 import { getStatus } from '@/api/device/status'
+import { listEventByDeviceId } from '@/api/device/event'
 export default {
   name: 'DeviceInfoView',
   data() {
@@ -161,7 +178,9 @@ export default {
       // 设备型号字典
       deviceModelOptions: [],
       // 设备状态字典表
-      deviceStatusOptions: []
+      deviceStatusOptions: [],
+      // 事件表
+      eventList: []
     }
   },
   created() {
@@ -174,6 +193,9 @@ export default {
     this.getDicts('device_status').then(response => {
       this.deviceStatusOptions = response.data
     })
+    this.getDicts('device_event_warning_level').then(response => {
+      this.warningLevelOptions = response.data
+    })
   },
   methods: {
     show(row) {
@@ -184,6 +206,13 @@ export default {
         this.deviceStatus = response.data
       })
       this.dialogVisible = true
+      listEventByDeviceId(row.id).then(response => {
+        this.eventList = response.data
+      })
+    },
+    // 告警类型字典翻译
+    warningLevelFormat(row, column) {
+      return this.selectDictLabel(this.warningLevelOptions, row.warningLevel)
     }
   }
 }

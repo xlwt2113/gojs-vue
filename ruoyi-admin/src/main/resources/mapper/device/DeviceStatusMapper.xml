@@ -67,7 +67,7 @@
             <if test="deviceId != null "> and device_id = #{deviceId}</if>
             <if test="deviceStatus != null "> and device_status = #{deviceStatus}</if>
             <if test="updateTimeBegin != null and updateTimeBegin != ''"> and update_time >= #{updateTimeBegin}</if>
-            <if test="updateTimeEnd != null and updateTimeEnd !=''"> and update_time <![CDATA[<=]]>  #{updateTimeEnd}</if>
+            <if test="updateTimeEnd != null and updateTimeEnd !=''"> and update_time <![CDATA[<=]]>  concat( #{updateTimeEnd}, ' 23:59:59')</if>
             <if test="pingAvg != null "> and ping_avg = #{pingAvg}</if>
             <if test="pingMin != null "> and ping_min = #{pingMin}</if>
             <if test="pingMax != null "> and ping_max = #{pingMax}</if>

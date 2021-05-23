@@ -55,7 +55,11 @@
     <el-table v-loading="loading" :data="topologyList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="id" width="60" />
-      <el-table-column label="拓扑图名称" align="center" prop="name" />
+      <el-table-column label="拓扑图名称" align="center" prop="name">
+        <template slot-scope="scope">
+          <el-link type="primary" @click="handleView(scope.row)">{{ scope.row.name }}</el-link>
+        </template>
+      </el-table-column>
       <el-table-column label="归属部门" align="center" prop="sysDeptName" />
       <el-table-column label="创建日期" align="center" prop="createTime" width="280">
         <template slot-scope="scope">
@@ -229,6 +233,9 @@ export default {
     // 打开设计界面
     handleDesign(row) {
       this.$router.push('/device/topology/design/' + row.id)
+    },
+    handleView(row) {
+      this.$router.push('/device/topology/view/' + row.id)
     },
     /** 提交按钮 */
     submitForm() {
