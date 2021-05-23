@@ -17,13 +17,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDeviceTopologyVo">
-        select t1.*,dd.dept_name from device_topology t1 left join sys_dept dd on t1.sys_dept_id = dd.dept_id
+        select t1.*,d.dept_name from device_topology t1 left join sys_dept d on t1.sys_dept_id = d.dept_id
     </sql>
 
     <select id="selectDeviceTopologyList" parameterType="DeviceTopology" resultMap="DeviceTopologyResult">
         <include refid="selectDeviceTopologyVo"/>
         <where>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <!-- 数据范围过滤 -->
+            ${params.dataScope}
         </where>
     </select>
 

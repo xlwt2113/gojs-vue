@@ -54,6 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         device_event AS t
             LEFT JOIN
         device_info AS i ON t.device_id = i.id
+        left join
+        sys_dept as d on i.dept_id = d.dept_id
     </sql>
 
     <select id="selectDeviceEventList" parameterType="DeviceEvent" resultMap="DeviceEventResult">
@@ -65,6 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="warningContent != null  and warningContent != ''"> and warning_content = #{warningContent}</if>
             <if test="updateTimeBegin != null and updateTimeBegin != ''"> and warning_time >= #{updateTimeBegin}</if>
             <if test="updateTimeEnd != null and updateTimeEnd !=''"> and warning_time <![CDATA[<=]]> concat( #{updateTimeEnd}, ' 23:59:59')</if>
+            <!-- 数据范围过滤 -->
+            ${params.dataScope}
         </where>
     </select>
 

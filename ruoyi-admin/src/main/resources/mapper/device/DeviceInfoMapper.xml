@@ -63,6 +63,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="location != null  and location != ''"> and location = #{location}</if>
             <if test="note != null  and note != ''"> and note = #{note}</if>
             <if test="deptId != null "> and u.dept_id = #{deptId}</if>
+            <!-- 数据范围过滤 -->
+            ${params.dataScope}
         </where>
     </select>
 

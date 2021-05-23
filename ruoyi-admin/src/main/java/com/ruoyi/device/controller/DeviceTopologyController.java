@@ -90,7 +90,6 @@ public class DeviceTopologyController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody DeviceTopology deviceTopology)
     {
-        deviceTopology.setSysDeptId(SecurityUtils.getLoginUser().getUser().getDeptId());
         return toAjax(deviceTopologyService.insertDeviceTopology(deviceTopology));
     }
 
@@ -102,7 +101,6 @@ public class DeviceTopologyController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody DeviceTopology deviceTopology)
     {
-        deviceTopology.setSysDeptId(SecurityUtils.getLoginUser().getUser().getDeptId());
         return toAjax(deviceTopologyService.updateDeviceTopology(deviceTopology));
     }
 

@@ -2,6 +2,7 @@ package com.ruoyi.device.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class DeviceStatusServiceImpl implements IDeviceStatusService
      * @return 设备状态表
      */
     @Override
+    @DataScope(deptAlias = "d")
     public List<DeviceStatus> selectDeviceStatusList(DeviceStatus deviceStatus)
     {
         return deviceStatusMapper.selectDeviceStatusList(deviceStatus);

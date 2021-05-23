@@ -1,6 +1,8 @@
 package com.ruoyi.device.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,19 +12,19 @@ import com.ruoyi.device.service.IDeviceTopologyService;
 
 /**
  * 拓扑图维护Service业务层处理
- * 
+ *
  * @author 王涛
  * @date 2021-05-09
  */
 @Service
-public class DeviceTopologyServiceImpl implements IDeviceTopologyService 
+public class DeviceTopologyServiceImpl implements IDeviceTopologyService
 {
     @Autowired
     private DeviceTopologyMapper deviceTopologyMapper;
 
     /**
      * 查询拓扑图维护
-     * 
+     *
      * @param id 拓扑图维护ID
      * @return 拓扑图维护
      */
@@ -34,11 +36,12 @@ public class DeviceTopologyServiceImpl implements IDeviceTopologyService
 
     /**
      * 查询拓扑图维护列表
-     * 
+     *
      * @param deviceTopology 拓扑图维护
      * @return 拓扑图维护
      */
     @Override
+    @DataScope(deptAlias = "d")
     public List<DeviceTopology> selectDeviceTopologyList(DeviceTopology deviceTopology)
     {
         return deviceTopologyMapper.selectDeviceTopologyList(deviceTopology);
@@ -46,7 +49,7 @@ public class DeviceTopologyServiceImpl implements IDeviceTopologyService
 
     /**
      * 新增拓扑图维护
-     * 
+     *
      * @param deviceTopology 拓扑图维护
      * @return 结果
      */
@@ -59,7 +62,7 @@ public class DeviceTopologyServiceImpl implements IDeviceTopologyService
 
     /**
      * 修改拓扑图维护
-     * 
+     *
      * @param deviceTopology 拓扑图维护
      * @return 结果
      */
@@ -72,7 +75,7 @@ public class DeviceTopologyServiceImpl implements IDeviceTopologyService
 
     /**
      * 批量删除拓扑图维护
-     * 
+     *
      * @param ids 需要删除的拓扑图维护ID
      * @return 结果
      */
@@ -84,7 +87,7 @@ public class DeviceTopologyServiceImpl implements IDeviceTopologyService
 
     /**
      * 删除拓扑图维护信息
-     * 
+     *
      * @param id 拓扑图维护ID
      * @return 结果
      */

@@ -68,23 +68,23 @@
       <!--        >修改-->
       <!--        </el-button>-->
       <!--      </el-col>-->
-            <el-col :span="1.5">
-              <el-button
-                type="danger"
-                plain
-                icon="el-icon-delete"
-                size="mini"
-                :disabled="multiple"
-                @click="handleDelete"
-                v-hasPermi="['device:event:remove']"
-              >删除
-              </el-button>
-            </el-col>
+      <el-col :span="1.5">
+        <el-button
+          v-hasPermi="['device:event:remove']"
+          type="danger"
+          plain
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+        >删除
+        </el-button>
+      </el-col>
       <right-toolbar :show-search.sync="showSearch" @queryTable="getList" />
     </el-row>
 
     <el-table v-loading="loading" :data="eventList" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="ID" align="center" prop="id" width="40" />
       <el-table-column label="设备名称" align="center" prop="deviceInfo.deviceName" />
       <el-table-column label="告警类型" align="center" prop="warningLevel" :formatter="warningLevelFormat" />
@@ -94,26 +94,26 @@
           <span>{{ parseTime(scope.row.warningTime, '{y}-{m}-{d} {hh}:{mi}:{ss}') }}</span>
         </template>
       </el-table-column>
-            <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-              <template slot-scope="scope">
-<!--                <el-button-->
-<!--                  size="mini"-->
-<!--                  type="text"-->
-<!--                  icon="el-icon-edit"-->
-<!--                  @click="handleUpdate(scope.row)"-->
-<!--                  v-hasPermi="['device:event:edit']"-->
-<!--                >修改-->
-<!--                </el-button>-->
-                <el-button
-                  size="mini"
-                  type="text"
-                  icon="el-icon-delete"
-                  @click="handleDelete(scope.row)"
-                  v-hasPermi="['device:event:remove']"
-                >删除
-                </el-button>
-              </template>
-            </el-table-column>
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+        <template slot-scope="scope">
+          <!--                <el-button-->
+          <!--                  size="mini"-->
+          <!--                  type="text"-->
+          <!--                  icon="el-icon-edit"-->
+          <!--                  @click="handleUpdate(scope.row)"-->
+          <!--                  v-hasPermi="['device:event:edit']"-->
+          <!--                >修改-->
+          <!--                </el-button>-->
+          <el-button
+            v-hasPermi="['device:event:remove']"
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+          >删除
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <pagination

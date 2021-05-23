@@ -109,6 +109,9 @@
             <el-form-item label="拓扑图名称" prop="name">
               <el-input v-model="form.name" placeholder="请输入拓扑图名称" />
             </el-form-item>
+            <el-form-item label="归属部门" prop="sysDeptId">
+              <treeselect v-model="form.sysDeptId" :options="deptOptions" :show-count="true" placeholder="请选择归属部门" />
+            </el-form-item>
             <el-form-item label="拓扑图数据" prop="imageData">
               <el-input v-model="form.imageData" type="textarea" :autosize="{ minRows: 16, maxRows: 30 }" readonly />
             </el-form-item>
@@ -126,11 +129,13 @@
 
 <script>
 import { listTopology, getTopology, delTopology, addTopology, updateTopology, exportTopology } from '@/api/device/topology'
+import { treeselect } from '@/api/system/dept'
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 export default {
   name: 'Topology',
-  components: {
-  },
+  components: { Treeselect },
   data() {
     return {
       // 遮罩层
@@ -157,6 +162,8 @@ export default {
         pageSize: 10,
         name: null
       },
+      // 部门树选项
+      deptOptions: undefined,
       // 表单参数
       form: {},
       // 表单校验
@@ -180,6 +187,12 @@ export default {
         this.loading = false
       })
     },
+    /** 查询部门下拉树结构 */
+    getTreeselect() {
+      treeselect().then(response => {
+        this.deptOptions = response.data
+      })
+    },
     // 取消按钮
     cancel() {
       this.open = false
@@ -194,7 +207,8 @@ export default {
         createBy: null,
         createTime: null,
         updateBy: null,
-        updateTime: null
+        updateTime: null,
+        sysDeptId: null
       }
       this.resetForm('form')
     },
@@ -217,12 +231,14 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.reset()
+      this.getTreeselect()
       this.open = true
       this.title = '添加拓扑图维护'
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset()
+      this.getTreeselect()
       const id = row.id || this.ids
       getTopology(id).then(response => {
         this.form = response.data

@@ -40,7 +40,7 @@
 
     <sql id="selectDeviceStatusVo">
    SELECT
-             device_id, device_status, update_time, ping_avg, t.note, ping_min, ping_max, ping_loss,
+             device_id, device_status, t.update_time, ping_avg, t.note, ping_min, ping_max, ping_loss,
             device_name,
             device_model,
             manufacturer,
@@ -58,6 +58,8 @@
             device_status AS t
                 inner JOIN
             device_info AS i ON t.device_id = i.id
+            left join
+            sys_dept as d on i.dept_id = d.dept_id
     </sql>
 
     <select id="selectDeviceStatusList" parameterType="DeviceStatus" resultMap="DeviceStatusResult">
@@ -72,6 +74,8 @@
             <if test="pingMin != null "> and ping_min = #{pingMin}</if>
             <if test="pingMax != null "> and ping_max = #{pingMax}</if>
             <if test="pingLoss != null "> and ping_loss = #{pingLoss}</if>
+            <!-- 数据范围过滤 -->
+            ${params.dataScope}
         </where>
         order by update_time desc
     </select>

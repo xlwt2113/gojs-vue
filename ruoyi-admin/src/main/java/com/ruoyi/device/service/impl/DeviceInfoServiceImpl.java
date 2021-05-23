@@ -2,6 +2,7 @@ package com.ruoyi.device.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.system.mapper.SysDeptMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class DeviceInfoServiceImpl implements IDeviceInfoService
      * @return deviceInfo
      */
     @Override
+    @DataScope(deptAlias = "d")
     public List<DeviceInfo> selectDeviceInfoList(DeviceInfo deviceInfo)
     {
         List<DeviceInfo> list = deviceInfoMapper.selectDeviceInfoList(deviceInfo);

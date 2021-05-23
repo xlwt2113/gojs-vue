@@ -128,9 +128,9 @@
             <span>近期查看拓扑图</span>
           </div>
           <div>
-            <template v-for="item in info.topologyList">
+            <div v-for="item in info.topologyList" :key="item.topology_id">
               <div><el-link type="primary" @click="viewTopology(item.topology_id)">{{ item.name }}</el-link></div>
-            </template>
+            </div>
           </div>
         </el-card>
       </el-col>
@@ -201,7 +201,7 @@ export default {
       var option
       option = {
         title: {
-          text: '近七天报警数量变化',
+          text: '近七天报警数量变化'
         },
         tooltip: {
           trigger: 'axis'
