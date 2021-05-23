@@ -25,18 +25,18 @@ export default {
       required: true
     }
   },
-  computed: {
-    variables() {
-      return variables;
-    },
-	sideTheme() {
-      return this.$store.state.settings.sideTheme
-    }
-  },
   data() {
     return {
       title: '网络设备管理系统',
       logo: logoImg
+    }
+  },
+  computed: {
+    variables() {
+      return variables
+    },
+    sideTheme() {
+      return this.$store.state.settings.sideTheme
     }
   }
 }

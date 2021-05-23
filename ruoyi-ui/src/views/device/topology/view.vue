@@ -2,6 +2,9 @@
   <div>
     <div style="width: 100%; display: flex; justify-content: space-between">
       <div id="myDiagramDiv" style="flex-grow: 1; height: 870px; background-color: #282c34;" />
+      <div style="width: 350px">
+        <div id="pieChart" style="width: 350px;height: 360px" />
+      </div>
     </div>
     <device-info-view ref="viewPage" />
   </div>
@@ -23,28 +26,49 @@ export default {
       topologyId: undefined,
       myPalette: undefined,
       topology: {},
-      positionX: 0,
-      positionY: 0,
-      deviceTypeOptions: [],
       // 设备型号字典
+      deviceTypeOptions: [],
       deviceModelOptions: [],
       deviceLevelOptions: [],
-      total: 0,
-      // deviceInfo表格数据
-      infoList: [],
-      // 查询参数
-      queryParams: {
-        pageNum: 1,
-        pageSize: 10,
-        deviceName: null,
-        deviceType: null,
-        deviceModel: null,
-        deptId: null
-      },
       // 遮罩层
       loading: true,
       // 定时器
-      timer: undefined
+      timer: undefined,
+      // 饼图设备状态统计值
+      goodCnt: 0,
+      commonCnt: 0,
+      badCnt: 0,
+      otherCnt: 0,
+      // 饼图对象
+      pieChart: undefined,
+      pieOption: {
+        title: {
+          text: '设备当前状态统计',
+          x: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+          top: 'bottom'
+        },
+        calculable: true,
+        series: [
+          {
+            name: '状态分类',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: [
+              { value: 0, name: '良好' },
+              { value: 0, name: '一般' },
+              { value: 0, name: '差' },
+              { value: 0, name: '中断/不存在' }
+            ]
+          }
+        ]
+      }
     }
   },
   mounted() {
@@ -272,6 +296,7 @@ export default {
         this.topology = response.data
         this.myDiagram.model = go.Model.fromJson(response.data.imageData)
         this.getDeviceStatus()
+        this.initPieChart()
       })
     },
 
@@ -305,6 +330,7 @@ export default {
     deviceLevelFormat(row, column) {
       return this.selectDictLabel(this.deviceLevelOptions, row.deviceLevel)
     },
+    // 获取设备状态信息
     getDeviceStatus() {
       console.log('开始更新设备状态')
       var model = this.myDiagram.model
@@ -314,6 +340,7 @@ export default {
         var nodeData = arr[i]
         deviceIds = deviceIds + nodeData.key + ','
       }
+      // 获取设备状态并更新节点颜色
       getDeviceStatus({ deviceIds: deviceIds + '0' }).then(response => {
         var model = this.myDiagram.model
         var arr = model.nodeDataArray
@@ -334,49 +361,42 @@ export default {
             }
           })
         }
-      })
 
-      // $.post('/device/status/deviceStatus', { deviceIds: deviceIds + '0' }, function(response) {
-      //   var model = myDiagram.model
-      //   var arr = model.nodeDataArray
-      //   // 循环节点匹配，更新设备状态
-      //   for (var i = 0; i < arr.length; i++) {
-      //     var nodeData = arr[i]
-      //     $.each(response.data, function(i, item) {
-      //       if (nodeData.key == item.deviceId) {
-      //         if (item.deviceStatus == '1') {
-      //           nodeData.status = 'green'
-      //         } else if (item.deviceStatus == '2') {
-      //           nodeData.status = 'yellow'
-      //         } else if (item.deviceStatus == '3') {
-      //           nodeData.status = 'red'
-      //         } else {
-      //           nodeData.status = 'grey'
-      //         }
-      //         model.updateTargetBindings(nodeData)
-      //       }
-      //     })
-      //   }
-      //
-      //   var goodCnt = 0
-      //   var commonCnt = 0
-      //   var badCnt = 0
-      //   var otherCnt = 0
-      //   $.each(response.data, function(i, item) {
-      //     if (item.deviceStatus == 1) {
-      //       goodCnt++
-      //     }
-      //     if (item.deviceStatus == 2) {
-      //       commonCnt++
-      //     }
-      //     if (item.deviceStatus == 3) {
-      //       badCnt++
-      //     }
-      //     if (item.deviceStatus > 3) {
-      //       otherCnt++
-      //     }
-      //   })
-      // })
+        // 计算统计图数据
+        this.goodCnt = 0
+        this.commonCnt = 0
+        this.badCnt = 0
+        this.otherCnt = 0
+        response.data.forEach(item => {
+          if (item.deviceStatus === 1) {
+            this.goodCnt++
+          }
+          if (item.deviceStatus === 2) {
+            this.commonCnt++
+          }
+          if (item.deviceStatus === 3) {
+            this.badCnt++
+          }
+          if (item.deviceStatus > 3) {
+            this.otherCnt++
+          }
+        })
+
+        this.pieOption.series[0].data = [
+          { value: this.goodCnt, name: '好' },
+          { value: this.commonCnt, name: '一般' },
+          { value: this.badCnt, name: '差' },
+          { value: this.otherCnt, name: '中断/不存在' }
+        ]
+
+        this.pieChart.setOption(this.pieOption)
+      })
+    },
+
+    initPieChart() {
+      var chartDom = document.getElementById('pieChart')
+      this.pieChart = this.$echarts.init(chartDom)
+      this.pieOption && this.pieChart.setOption(this.pieOption)
     }
   }
 }

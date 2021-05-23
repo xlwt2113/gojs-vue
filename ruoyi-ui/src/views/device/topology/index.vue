@@ -56,6 +56,7 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编号" align="center" prop="id" width="60" />
       <el-table-column label="拓扑图名称" align="center" prop="name" />
+      <el-table-column label="归属部门" align="center" prop="sysDeptName" />
       <el-table-column label="创建日期" align="center" prop="createTime" width="280">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>

@@ -493,7 +493,7 @@ export default {
             break
           }
         }
-        this.myDiagram.model = go.Model.fromJson(this.myDiagram.model.toJson());
+        this.myDiagram.model = go.Model.fromJson(this.myDiagram.model.toJson())
 
         this.dialogVisible = false
       } else {

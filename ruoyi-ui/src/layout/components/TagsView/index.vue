@@ -50,7 +50,7 @@ export default {
       return this.$store.state.permission.routes
     },
     theme() {
-      return this.$store.state.settings.theme;
+      return this.$store.state.settings.theme
     }
   },
   watch: {
@@ -75,11 +75,11 @@ export default {
       return route.path === this.$route.path
     },
     activeStyle(tag) {
-      if (!this.isActive(tag)) return {};
+      if (!this.isActive(tag)) return {}
       return {
-        "background-color": this.theme,
-        "border-color": this.theme
-      };
+        'background-color': this.theme,
+        'border-color': this.theme
+      }
     },
     isAffix(tag) {
       return tag.meta && tag.meta.affix
@@ -168,7 +168,7 @@ export default {
       })
     },
     closeOthersTags() {
-      this.$router.push(this.selectedTag).catch(()=>{});
+      this.$router.push(this.selectedTag).catch(() => {})
       this.$store.dispatch('tagsView/delOthersViews', this.selectedTag).then(() => {
         this.moveToCurrentTag()
       })

@@ -17,7 +17,7 @@
         </div>
       </el-image>
       <div v-else class="image">
-        <el-image :src="value" :style="`width:150px;height:150px;`" fit="fill"/>
+        <el-image :src="value" :style="`width:150px;height:150px;`" fit="fill" />
         <div class="mask">
           <div class="actions">
             <span title="预览" @click.stop="dialogVisible = true">
@@ -37,49 +37,49 @@
 </template>
 
 <script>
-import { getToken } from "@/utils/auth";
+import { getToken } from '@/utils/auth'
 
 export default {
-  data() {
-    return {
-      dialogVisible: false,
-      uploadImgUrl: process.env.VUE_APP_BASE_API + "/common/upload", // 上传的图片服务器地址
-      headers: {
-        Authorization: "Bearer " + getToken(),
-      },
-    };
-  },
   props: {
     value: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
+  data() {
+    return {
+      dialogVisible: false,
+      uploadImgUrl: process.env.VUE_APP_BASE_API + '/common/upload', // 上传的图片服务器地址
+      headers: {
+        Authorization: 'Bearer ' + getToken()
+      }
+    }
+  },
+  watch: {},
   methods: {
     removeImage() {
-      this.$emit("input", "");
+      this.$emit('input', '')
     },
     handleUploadSuccess(res) {
-      this.$emit("input", res.url);
-      this.loading.close();
+      this.$emit('input', res.url)
+      this.loading.close()
     },
     handleBeforeUpload() {
       this.loading = this.$loading({
         lock: true,
-        text: "上传中",
-        background: "rgba(0, 0, 0, 0.7)",
-      });
+        text: '上传中',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
     },
     handleUploadError() {
       this.$message({
-        type: "error",
-        message: "上传失败",
-      });
-      this.loading.close();
-    },
-  },
-  watch: {},
-};
+        type: 'error',
+        message: '上传失败'
+      })
+      this.loading.close()
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

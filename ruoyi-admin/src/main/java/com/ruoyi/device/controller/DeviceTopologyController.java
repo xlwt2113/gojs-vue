@@ -1,6 +1,11 @@
 package com.ruoyi.device.controller;
 
+import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.system.domain.SysViewCount;
+import com.ruoyi.system.service.ISysViewCountService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +37,9 @@ public class DeviceTopologyController extends BaseController
 {
     @Autowired
     private IDeviceTopologyService deviceTopologyService;
+
+    @Autowired
+    private ISysViewCountService sysViewCountService;
 
     /**
      * 查询拓扑图维护列表
@@ -66,6 +74,11 @@ public class DeviceTopologyController extends BaseController
     @Log(title = "拓扑图查看", businessType = BusinessType.OTHER)
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
+        // 记录访问次数
+        SysViewCount viewCount = new SysViewCount();
+        viewCount.setSysUserId(SecurityUtils.getLoginUser().getUser().getUserId());
+        viewCount.setTopologyId(id);
+        sysViewCountService.insertSysViewCount(viewCount);
         return AjaxResult.success(deviceTopologyService.selectDeviceTopologyById(id));
     }
 
@@ -77,6 +90,7 @@ public class DeviceTopologyController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody DeviceTopology deviceTopology)
     {
+        deviceTopology.setSysDeptId(SecurityUtils.getLoginUser().getUser().getDeptId());
         return toAjax(deviceTopologyService.insertDeviceTopology(deviceTopology));
     }
 
@@ -88,6 +102,7 @@ public class DeviceTopologyController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody DeviceTopology deviceTopology)
     {
+        deviceTopology.setSysDeptId(SecurityUtils.getLoginUser().getUser().getDeptId());
         return toAjax(deviceTopologyService.updateDeviceTopology(deviceTopology));
     }
 

@@ -13,7 +13,6 @@ const inheritAttrs = {
   dialog: 'inheritAttrs: false,'
 }
 
-
 export function makeUpJs(conf, type) {
   confGlobal = conf = JSON.parse(JSON.stringify(conf))
   const dataList = []

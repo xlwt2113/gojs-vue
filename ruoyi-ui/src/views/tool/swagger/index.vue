@@ -5,22 +5,22 @@
 </template>
 <script>
 export default {
-  name: "Swagger",
+  name: 'Swagger',
   data() {
     return {
-      src: process.env.VUE_APP_BASE_API + "/swagger-ui.html",
-      height: document.documentElement.clientHeight - 94.5 + "px;",
+      src: process.env.VUE_APP_BASE_API + '/swagger-ui.html',
+      height: document.documentElement.clientHeight - 94.5 + 'px;',
       loading: true
-    };
+    }
   },
   mounted: function() {
     setTimeout(() => {
-      this.loading = false;
-    }, 230);
-    const that = this;
+      this.loading = false
+    }, 230)
+    const that = this
     window.onresize = function temp() {
-      that.height = document.documentElement.clientHeight - 94.5 + "px;";
-    };
+      that.height = document.documentElement.clientHeight - 94.5 + 'px;'
+    }
   }
-};
+}
 </script>

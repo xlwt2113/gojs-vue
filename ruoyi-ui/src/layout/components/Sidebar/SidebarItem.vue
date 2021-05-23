@@ -57,7 +57,7 @@ export default {
   methods: {
     hasOneShowingChild(children = [], parent) {
       if (!children) {
-        children = [];
+        children = []
       }
       const showingChildren = children.filter(item => {
         if (item.hidden) {

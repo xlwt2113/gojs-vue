@@ -10,10 +10,19 @@
             <img src="@/assets/images/dark.svg" alt="dark">
             <div v-if="sideTheme === 'theme-dark'" class="setting-drawer-block-checbox-selectIcon" style="display: block;">
               <i aria-label="图标: check" class="anticon anticon-check">
-                <svg viewBox="64 64 896 896" data-icon="check" width="1em" height="1em" :fill="theme" aria-hidden="true"
-                     focusable="false" class="">
+                <svg
+                  viewBox="64 64 896 896"
+                  data-icon="check"
+                  width="1em"
+                  height="1em"
+                  :fill="theme"
+                  aria-hidden="true"
+                  focusable="false"
+                  class=""
+                >
                   <path
-                    d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"/>
+                    d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"
+                  />
                 </svg>
               </i>
             </div>
@@ -22,10 +31,19 @@
             <img src="@/assets/images/light.svg" alt="light">
             <div v-if="sideTheme === 'theme-light'" class="setting-drawer-block-checbox-selectIcon" style="display: block;">
               <i aria-label="图标: check" class="anticon anticon-check">
-                <svg viewBox="64 64 896 896" data-icon="check" width="1em" height="1em" :fill="theme" aria-hidden="true"
-                     focusable="false" class="">
+                <svg
+                  viewBox="64 64 896 896"
+                  data-icon="check"
+                  width="1em"
+                  height="1em"
+                  :fill="theme"
+                  aria-hidden="true"
+                  focusable="false"
+                  class=""
+                >
                   <path
-                    d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"/>
+                    d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"
+                  />
                 </svg>
               </i>
             </div>
@@ -38,10 +56,10 @@
         </div>
       </div>
 
-      <el-divider/>
+      <el-divider />
 
       <h3 class="drawer-title">系统布局配置</h3>
-      
+
       <div class="drawer-item">
         <span>开启 TopNav</span>
         <el-switch v-model="topNav" class="drawer-switch" />
@@ -62,7 +80,7 @@
         <el-switch v-model="sidebarLogo" class="drawer-switch" />
       </div>
 
-      <el-divider/>
+      <el-divider />
 
       <el-button size="small" type="primary" plain icon="el-icon-document-add" @click="saveSetting">保存配置</el-button>
       <el-button size="small" plain icon="el-icon-refresh" @click="resetSetting">重置配置</el-button>
@@ -79,7 +97,7 @@ export default {
     return {
       theme: this.$store.state.settings.theme,
       sideTheme: this.$store.state.settings.sideTheme
-    };
+    }
   },
   computed: {
     fixedHeader: {
@@ -103,7 +121,7 @@ export default {
           value: val
         })
         if (!val) {
-          this.$store.commit("SET_SIDEBAR_ROUTERS", this.$store.state.permission.defaultRoutes);
+          this.$store.commit('SET_SIDEBAR_ROUTERS', this.$store.state.permission.defaultRoutes)
         }
       }
     },
@@ -128,7 +146,7 @@ export default {
           value: val
         })
       }
-    },
+    }
   },
   methods: {
     themeChange(val) {
@@ -136,25 +154,25 @@ export default {
         key: 'theme',
         value: val
       })
-      this.theme = val;
+      this.theme = val
     },
     handleTheme(val) {
       this.$store.dispatch('settings/changeSetting', {
         key: 'sideTheme',
         value: val
       })
-      this.sideTheme = val;
+      this.sideTheme = val
     },
     saveSetting() {
       const loading = this.$loading({
         lock: true,
         fullscreen: false,
-        text: "正在保存到本地，请稍后...",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)"
-      });
+        text: '正在保存到本地，请稍后...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
       localStorage.setItem(
-        "layout-setting",
+        'layout-setting',
         `{
             "topNav":${this.topNav},
             "tagsView":${this.tagsView},
@@ -163,19 +181,19 @@ export default {
             "sideTheme":"${this.sideTheme}",
             "theme":"${this.theme}"
           }`
-      );
+      )
       setTimeout(loading.close(), 1000)
     },
     resetSetting() {
       this.$loading({
         lock: true,
         fullscreen: false,
-        text: "正在清除设置缓存并刷新，请稍后...",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)"
-      });
-      localStorage.removeItem("layout-setting")
-      setTimeout("window.location.reload()", 1000)
+        text: '正在清除设置缓存并刷新，请稍后...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      localStorage.removeItem('layout-setting')
+      setTimeout('window.location.reload()', 1000)
     }
   }
 }

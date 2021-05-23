@@ -7,7 +7,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 拓扑图维护对象 device_topology
- * 
+ *
  * @author 王涛
  * @date 2021-05-09
  */
@@ -25,32 +25,52 @@ public class DeviceTopology extends BaseEntity
     /** 拓扑图数据 */
     private String imageData;
 
-    public void setId(Long id) 
+    private Long sysDeptId;
+
+    private String sysDeptName;
+
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setName(String name) 
+    public void setName(String name)
     {
         this.name = name;
     }
 
-    public String getName() 
+    public String getName()
     {
         return name;
     }
-    public void setImageData(String imageData) 
+    public void setImageData(String imageData)
     {
         this.imageData = imageData;
     }
 
-    public String getImageData() 
+    public String getImageData()
     {
         return imageData;
+    }
+
+    public Long getSysDeptId() {
+        return sysDeptId;
+    }
+
+    public String getSysDeptName() {
+        return sysDeptName;
+    }
+
+    public void setSysDeptName(String sysDeptName) {
+        this.sysDeptName = sysDeptName;
+    }
+
+    public void setSysDeptId(Long sysDeptId) {
+        this.sysDeptId = sysDeptId;
     }
 
     @Override
