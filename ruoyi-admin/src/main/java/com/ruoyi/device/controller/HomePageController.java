@@ -134,13 +134,13 @@ public class HomePageController extends BaseController {
         param.setUpdateTimeEnd(DateUtils.getDate());
         List<DeviceEvent> eventList = deviceEventService.selectDeviceEventList(param);
         for(DeviceEvent event: eventList){
-            if("1".equals(event.getWarningLevel())){
+            if(event.getWarningLevel() == 1){
                 level1++;
             }
-            if("2".equals(event.getWarningLevel())){
+            if(event.getWarningLevel() == 2){
                 level2++;
             }
-            if("3".equals(event.getWarningLevel())){
+            if(event.getWarningLevel() == 3){
                 level3++;
             }
         }

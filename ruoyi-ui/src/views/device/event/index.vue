@@ -222,6 +222,11 @@ export default {
     /** 查询设备事件表列表 */
     getList() {
       this.loading = true
+      if (this.$route.query && this.$route.query.warningLevel) {
+        this.queryParams.warningLevel = this.$route.query.warningLevel
+        this.queryParams.updateTimeBegin = this.$route.query.warningTime
+        this.queryParams.updateTimeEnd = this.$route.query.warningTime
+      }
       listEvent(this.queryParams).then(response => {
         this.eventList = response.rows
         this.total = response.total

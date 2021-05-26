@@ -20,7 +20,7 @@
                         <span style="font-size: 30px">一级报警</span>
                       </el-col>
                       <el-col :span="3" style="text-align: center">
-                        <span style="font-size: 40px;">{{ info.level1 }}</span>
+                        <span style="font-size: 40px;"><a href="#" @click="openEventPage(1)">{{ info.level1 }}</a></span>
                       </el-col>
                     </el-row>
                   </div>
@@ -37,7 +37,7 @@
                         <span style="font-size: 30px">二级报警</span>
                       </el-col>
                       <el-col :span="3" style="text-align: center">
-                        <span style="font-size: 40px;">{{ info.level2 }}</span>
+                        <span style="font-size: 40px;"><a href="#" @click="openEventPage(2)">{{ info.level2 }}</a></span>
                       </el-col>
                     </el-row>
                   </div>
@@ -54,7 +54,7 @@
                         <span style="font-size: 30px">三级报警</span>
                       </el-col>
                       <el-col :span="3" style="text-align: center">
-                        <span style="font-size: 40px;">{{ info.level3 }}</span>
+                        <span style="font-size: 40px;"><a href="#" @click="openEventPage(3)">{{ info.level3 }}</a></span>
                       </el-col>
                     </el-row>
                   </div>
@@ -172,6 +172,7 @@
 
 <script>
 import { home } from '@/api/device/home'
+import moment from 'moment'
 
 export default {
   name: 'Index',
@@ -308,8 +309,12 @@ export default {
     },
     // 打开查看页面
     viewTopology(id) {
-      console.log(id)
       this.$router.push('/device/topology/view/' + id)
+    },
+
+    // 打开设备事件表
+    openEventPage(level) {
+      this.$router.push('/device/event?warningLevel=' + level + '&warningTime=' + moment().format('YYYY-MM-DD'))
     }
   }
 }
