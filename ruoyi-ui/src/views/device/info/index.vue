@@ -350,6 +350,9 @@ export default {
         ],
         deviceIp1: [
           { required: true, message: '设备IP1不能为空', trigger: 'blur' }
+        ],
+        deptId: [
+          { required: true, message: '请选择部门', trigger: 'blur' }
         ]
       },
       // 部门树选项
