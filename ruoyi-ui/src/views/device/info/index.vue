@@ -169,6 +169,13 @@
             @click="handleDelete(scope.row)"
           >删除
           </el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-s-platform"
+            @click="handleOpenPage(scope.row)"
+          >外部系统
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -231,24 +238,24 @@
             <el-form-item label="设备IP2" prop="deviceIp2">
               <el-input v-model="form.deviceIp2" placeholder="请输入设备IP2" />
             </el-form-item>
-            <el-form-item label="设备IP3" prop="deviceIp3">
-              <el-input v-model="form.deviceIp3" placeholder="请输入设备IP3" />
-            </el-form-item>
-            <el-form-item label="设备IP4" prop="deviceIp4">
-              <el-input v-model="form.deviceIp4" placeholder="请输入设备IP4" />
-            </el-form-item>
-            <el-form-item label="设备IP5" prop="deviceIp5">
-              <el-input v-model="form.deviceIp5" placeholder="请输入设备IP5" />
-            </el-form-item>
-            <el-form-item label="设备IP6" prop="deviceIp6">
-              <el-input v-model="form.deviceIp6" placeholder="请输入设备IP6" />
-            </el-form-item>
-            <el-form-item label="设备IP7" prop="deviceIp7">
-              <el-input v-model="form.deviceIp7" placeholder="请输入设备IP7" />
-            </el-form-item>
-            <el-form-item label="设备IP8" prop="deviceIp8">
-              <el-input v-model="form.deviceIp8" placeholder="请输入设备IP8" />
-            </el-form-item>
+            <!--            <el-form-item label="设备IP3" prop="deviceIp3">-->
+            <!--              <el-input v-model="form.deviceIp3" placeholder="请输入设备IP3" />-->
+            <!--            </el-form-item>-->
+            <!--            <el-form-item label="设备IP4" prop="deviceIp4">-->
+            <!--              <el-input v-model="form.deviceIp4" placeholder="请输入设备IP4" />-->
+            <!--            </el-form-item>-->
+            <!--            <el-form-item label="设备IP5" prop="deviceIp5">-->
+            <!--              <el-input v-model="form.deviceIp5" placeholder="请输入设备IP5" />-->
+            <!--            </el-form-item>-->
+            <!--            <el-form-item label="设备IP6" prop="deviceIp6">-->
+            <!--              <el-input v-model="form.deviceIp6" placeholder="请输入设备IP6" />-->
+            <!--            </el-form-item>-->
+            <!--            <el-form-item label="设备IP7" prop="deviceIp7">-->
+            <!--              <el-input v-model="form.deviceIp7" placeholder="请输入设备IP7" />-->
+            <!--            </el-form-item>-->
+            <!--            <el-form-item label="设备IP8" prop="deviceIp8">-->
+            <!--              <el-input v-model="form.deviceIp8" placeholder="请输入设备IP8" />-->
+            <!--            </el-form-item>-->
             <el-form-item label="安装日期" prop="installDate">
               <el-date-picker
                 v-model="form.installDate"
@@ -261,6 +268,15 @@
             </el-form-item>
             <el-form-item label="安装位置" prop="location">
               <el-input v-model="form.location" placeholder="请输入安装位置" />
+            </el-form-item>
+            <el-form-item label="外部系统地址" prop="url">
+              <el-input v-model="form.url" placeholder="请输入外部系统地址" />
+            </el-form-item>
+            <el-form-item label="系统用户名" prop="username">
+              <el-input v-model="form.username" placeholder="请输入系统用户名" />
+            </el-form-item>
+            <el-form-item label="系统密码" prop="password">
+              <el-input v-model="form.password" placeholder="请输入系统密码" />
             </el-form-item>
             <el-form-item label="备注" prop="note">
               <el-input v-model="form.note" placeholder="请输入备注" />
@@ -513,6 +529,9 @@ export default {
       }).then(response => {
         this.download(response.msg)
       })
+    },
+    handleOpenPage(row) {
+      window.open(row.url)
     }
   }
 }

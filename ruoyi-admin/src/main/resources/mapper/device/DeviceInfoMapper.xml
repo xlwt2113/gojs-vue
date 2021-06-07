@@ -25,6 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="miningArea"    column="mining_area"    />
         <result property="company"    column="company"    />
         <result property="deptId"    column="dept_id"    />
+        <result property="url"    column="url"    />
+        <result property="password"    column="password"    />
+        <result property="username"    column="username"    />
         <association property="dept"     column="dept_id" javaType="SysDept" resultMap="deptResult" />
     </resultMap>
 
@@ -95,6 +98,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="miningArea != null">mining_area,</if>
             <if test="company != null">company,</if>
             <if test="deptId != null">dept_id,</if>
+            <if test="url != null">url,</if>
+            <if test="password != null">password,</if>
+            <if test="username != null">username,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="deviceName != null and deviceName != ''">#{deviceName},</if>
@@ -116,6 +122,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="miningArea != null">#{miningArea},</if>
             <if test="company != null">#{company},</if>
             <if test="deptId != null">#{deptId},</if>
+            <if test="url != null">#{url},</if>
+            <if test="password != null">#{password},</if>
+            <if test="username != null">#{username},</if>
          </trim>
     </insert>
 
@@ -141,6 +150,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="miningArea != null">mining_area = #{miningArea},</if>
             <if test="company != null">company = #{company},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="username != null">username = #{username},</if>
         </trim>
         where id = #{id}
     </update>

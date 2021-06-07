@@ -49,36 +49,36 @@
                       {{ deviceInfo.deviceIp2 }}
                     </el-form-item>
                   </el-col>
-                  <el-col :span="10">
-                    <el-form-item label="设备IP3">
-                      {{ deviceInfo.deviceIp3 }}
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="10">
-                    <el-form-item label="设备IP4">
-                      {{ deviceInfo.deviceIp4 }}
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="10">
-                    <el-form-item label="设备IP5">
-                      {{ deviceInfo.deviceIp5 }}
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="10">
-                    <el-form-item label="设备IP6">
-                      {{ deviceInfo.deviceIp6 }}
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="10">
-                    <el-form-item label="设备IP7">
-                      {{ deviceInfo.deviceIp7 }}
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="10">
-                    <el-form-item label="设备IP8">
-                      {{ deviceInfo.deviceIp8 }}
-                    </el-form-item>
-                  </el-col>
+                  <!--                  <el-col :span="10">-->
+                  <!--                    <el-form-item label="设备IP3">-->
+                  <!--                      {{ deviceInfo.deviceIp3 }}-->
+                  <!--                    </el-form-item>-->
+                  <!--                  </el-col>-->
+                  <!--                  <el-col :span="10">-->
+                  <!--                    <el-form-item label="设备IP4">-->
+                  <!--                      {{ deviceInfo.deviceIp4 }}-->
+                  <!--                    </el-form-item>-->
+                  <!--                  </el-col>-->
+                  <!--                  <el-col :span="10">-->
+                  <!--                    <el-form-item label="设备IP5">-->
+                  <!--                      {{ deviceInfo.deviceIp5 }}-->
+                  <!--                    </el-form-item>-->
+                  <!--                  </el-col>-->
+                  <!--                  <el-col :span="10">-->
+                  <!--                    <el-form-item label="设备IP6">-->
+                  <!--                      {{ deviceInfo.deviceIp6 }}-->
+                  <!--                    </el-form-item>-->
+                  <!--                  </el-col>-->
+                  <!--                  <el-col :span="10">-->
+                  <!--                    <el-form-item label="设备IP7">-->
+                  <!--                      {{ deviceInfo.deviceIp7 }}-->
+                  <!--                    </el-form-item>-->
+                  <!--                  </el-col>-->
+                  <!--                  <el-col :span="10">-->
+                  <!--                    <el-form-item label="设备IP8">-->
+                  <!--                      {{ deviceInfo.deviceIp8 }}-->
+                  <!--                    </el-form-item>-->
+                  <!--                  </el-col>-->
                   <el-col :span="10">
                     <el-form-item label="安装日期">
                       {{ deviceInfo.installDate }}
@@ -92,6 +92,21 @@
                   <el-col :span="10">
                     <el-form-item label="安装备注">
                       {{ deviceInfo.note }}
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="24">
+                    <el-form-item label="外部系统地址">
+                      <a :href="deviceInfo.url" target="_blank">{{ deviceInfo.url }}</a>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="10">
+                    <el-form-item label="用户名">
+                      {{ deviceInfo.username }}
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="10">
+                    <el-form-item label="密码">
+                      {{ deviceInfo.password }}
                     </el-form-item>
                   </el-col>
                 </el-form>

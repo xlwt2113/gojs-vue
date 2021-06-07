@@ -20,6 +20,10 @@ public class DeviceInfo extends BaseEntity
 
     private SysDept dept;
 
+    private String url;
+    private String password;
+    private String username;
+
     /** $column.columnComment */
     private Integer id;
 
@@ -274,6 +278,30 @@ public class DeviceInfo extends BaseEntity
 
     public void setDeviceLevel(String deviceLevel) {
         this.deviceLevel = deviceLevel;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
