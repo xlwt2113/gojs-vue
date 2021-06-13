@@ -49,12 +49,13 @@ public class DeviceInfoServiceImpl implements IDeviceInfoService
     public List<DeviceInfo> selectDeviceInfoList(DeviceInfo deviceInfo)
     {
         List<DeviceInfo> list = deviceInfoMapper.selectDeviceInfoList(deviceInfo);
+        SysDept rootDep = deptMapper.getRootDept();
         for(DeviceInfo info : list){
             // 获取部门层级
             String[] deptIds = info.getDept().getAncestors().split(",");
             String deptName = "";
             for(String deptId: deptIds){
-                if(Long.parseLong(deptId)!=0){
+                if(Long.parseLong(deptId)!=rootDep.getParentId().longValue()){
                     SysDept dept = deptMapper.selectDeptById(Long.parseLong(deptId));
                     deptName = deptName + dept.getDeptName() + " - ";
                 }
@@ -108,8 +109,21 @@ public class DeviceInfoServiceImpl implements IDeviceInfoService
      * @return 结果
      */
     @Override
-    public int deleteDeviceInfoById(Integer id)
+    public int deleteDeviceInfoById(Long id)
     {
         return deviceInfoMapper.deleteDeviceInfoById(id);
+    }
+
+    @Override
+    public void synDevice(Long maxDeviceId,Long maxDepId) {
+        List<DeviceInfo> deviceList = this.deviceInfoMapper.selectDeviceInfoList(new DeviceInfo());
+        for(DeviceInfo info:deviceList){
+            deviceInfoMapper.deleteDeviceInfoById(info.getId().longValue());
+        }
+        for(DeviceInfo info:deviceList){
+            info.setId(info.getId().longValue() + maxDeviceId);
+            info.setDeptId(info.getDeptId() + maxDepId);
+            deviceInfoMapper.insertDeviceInfo(info);
+        }
     }
 }

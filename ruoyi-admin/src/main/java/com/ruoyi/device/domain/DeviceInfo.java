@@ -25,7 +25,7 @@ public class DeviceInfo extends BaseEntity
     private String username;
 
     /** $column.columnComment */
-    private Integer id;
+    private Long id;
 
     /** 设备名称 */
     @Excel(name = "设备名称")
@@ -100,12 +100,12 @@ public class DeviceInfo extends BaseEntity
     /** 部门ID */
     private Long deptId;
 
-    public void setId(Integer id)
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Integer getId()
+    public Long getId()
     {
         return id;
     }

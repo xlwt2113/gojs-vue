@@ -79,6 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertDeviceInfo" parameterType="DeviceInfo" useGeneratedKeys="true" keyProperty="id">
         insert into device_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">id,</if>
             <if test="deviceName != null and deviceName != ''">device_name,</if>
             <if test="deviceType != null and deviceType != ''">device_type,</if>
             <if test="deviceLevel != null and deviceLevel != ''">device_level,</if>
@@ -103,6 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="username != null">username,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
             <if test="deviceName != null and deviceName != ''">#{deviceName},</if>
             <if test="deviceType != null and deviceType != ''">#{deviceType},</if>
             <if test="deviceLevel != null and deviceLevel != ''">#{deviceLevel},</if>
@@ -157,7 +159,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteDeviceInfoById" parameterType="Integer">
+    <delete id="deleteDeviceInfoById" parameterType="Long">
         delete from device_info where id = #{id}
     </delete>
 
