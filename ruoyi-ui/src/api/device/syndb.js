@@ -8,3 +8,11 @@ export function synDb(data) {
     data: data
   })
 }
+
+// 新增设备事件表
+export function updateAllDept() {
+  return request({
+    url: '/device/syndb',
+    method: 'get'
+  })
+}

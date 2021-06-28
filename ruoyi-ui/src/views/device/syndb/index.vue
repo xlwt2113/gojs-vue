@@ -18,6 +18,8 @@
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="open">开始同步</el-button>
+
+              <el-button type="primary" @click="updateDetp">更新部门</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -37,6 +39,7 @@
 
 <script>
 import { synDb } from '@/api/device/syndb'
+import { updateAllDept } from '@/api/device/syndb'
 
 export default {
   name: 'Syndb',
@@ -68,11 +71,18 @@ export default {
           synDb(this.form).then(response => {
             this.msgSuccess('新增成功')
             this.open = false
-            this.getList()
           })
         }
       })
     },
+
+    updateDetp() {
+      updateAllDept(this.form).then(response => {
+        this.msgSuccess('操作完成')
+        this.open = false
+      })
+    },
+
     open() {
       this.$confirm('再次确定是否已备份数据库?', '提示', {
         confirmButtonText: '确定',
@@ -84,7 +94,6 @@ export default {
             synDb(this.form).then(response => {
               this.msgSuccess('操作完成')
               this.open = false
-              this.getList()
             })
           }
         })

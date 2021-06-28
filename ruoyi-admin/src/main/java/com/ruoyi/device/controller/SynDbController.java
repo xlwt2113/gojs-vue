@@ -39,4 +39,20 @@ public class SynDbController {
         this.topologyService.sysTopology(synDbForm.getMaxDeviceId());
         return AjaxResult.success();
     }
+
+
+    /**
+     * 同步数据库
+     * @return
+     */
+    @GetMapping
+    public AjaxResult updateDept(){
+        List<SysDept> list = deptService.selectDeptList(new SysDept());
+        for(SysDept dept:list){
+            deptService.updateDept(dept);
+        }
+        return AjaxResult.success();
+    }
+
+
 }
