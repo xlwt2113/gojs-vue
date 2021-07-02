@@ -1,0 +1,1 @@
+INSERT INTO `sys_config` (`config_name`,`config_key`,`config_value`,`config_type`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) VALUES ('软件版本号','softVersion','1.0','Y','admin','2021-07-02 21:34:23','admin','2021-07-02 21:38:27','用于监测是否最新版本');
